@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexova Enhance - Professional Photo Enhancement</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0066ff;
+            --blue-light: #00a8ff;
+            --dark-bg: #0a0e27;
+            --darker-bg: #050810;
+            --card-bg: #1a1f3a;
+            --border-color: #2d3b5f;
+            --text-primary: #e0e6f7;
+            --text-secondary: #a0aac8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #0d1228 50%, #050810 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInLeft {
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeInRight {
+            from { transform: translateX(30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes slideIn {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 102, 255, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(0, 102, 255, 0.5); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        header {
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.8) 0%, rgba(26, 31, 58, 0.6) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: contain;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .brand-info h1 {
+            background: linear-gradient(135deg, #0099ff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .contact-btn {
+            background: linear-gradient(135deg, #0066ff 0%, #00a8ff 100%);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.3s ease;
+            animation: fadeInRight 0.8s ease-out;
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 102, 255, 0.5);
+            animation: glow 1.5s ease-in-out infinite;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(0, 168, 255, 0.05) 100%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 5rem 2rem;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0099ff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        main {
+            flex: 1;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .upload-area {
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8) 0%, rgba(26, 31, 58, 0.5) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .dropzone {
+            border: 3px dashed var(--blue-light);
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.08) 0%, rgba(0, 168, 255, 0.04) 100%);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .dropzone:hover,
+        .dropzone.drag-over {
+            border-color: var(--blue-light);
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.15) 0%, rgba(0, 168, 255, 0.1) 100%);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 102, 255, 0.2);
+        }
+
+        .dropzone-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .dropzone h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .dropzone p {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .dropzone small {
+            color: var(--text-secondary);
+            opacity: 0.8;
+        }
+
+        /* ===== IMAGE SLIDER COMPARISON ===== */
+        #comparisonContainer {
+            display: none;
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8) 0%, rgba(26, 31, 58, 0.5) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        #comparisonContainer.active {
+            display: block;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 2rem;
+            border-radius: 16px;
+            overflow: hidden;
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        .img-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 75%;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(0, 168, 255, 0.05) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .img-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        #beforeImage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 5;
+            width: 100%;
+            height: 100%;
+        }
+
+        #afterImage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 3;
+            width: 100%;
+            height: 100%;
+            clip-path: inset(0 50% 0 0);
+        }
+
+        #loadingIndicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 4;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(10, 14, 39, 0.7);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #loadingIndicator.active {
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(0, 102, 255, 0.15);
+            border-top-color: var(--blue-light);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        .loading p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Slider Handle */
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #0099ff 0%, #00d4ff 100%);
+            z-index: 6;
+            cursor: col-resize;
+            transform: translateX(-50%);
+            transition: all 0.2s ease;
+        }
+
+        .slider-handle::before,
+        .slider-handle::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #0066ff 0%, #00a8ff 100%);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 4px 20px rgba(0, 102, 255, 0.4);
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .slider-handle::before {
+            left: -35px;
+            content: '\f060';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            font-size: 0;
+        }
+
+        .slider-handle::after {
+            right: -35px;
+            content: '\f061';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            font-size: 0;
+        }
+
+        .labels {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .label {
+            background: rgba(0, 102, 255, 0.8);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        /* ===== ACTION BUTTONS ===== */
+        .action-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, #0066ff 0%, #00a8ff 100%);
+            color: var(--text-primary);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.35);
+        }
+
+        .btn-download:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 102, 255, 0.5);
+        }
+
+        .btn-reset {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-reset:hover {
+            border-color: var(--blue-light);
+            color: var(--blue-light);
+            background: rgba(0, 102, 255, 0.1);
+            transform: translateY(-4px);
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features {
+            margin: 5rem 0;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #0099ff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8) 0%, rgba(26, 31, 58, 0.5) 100%);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.4s ease;
+            animation: popIn 0.5s ease-out;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--blue-light);
+            box-shadow: 0 12px 40px rgba(0, 102, 255, 0.25);
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.9) 0%, rgba(26, 31, 58, 0.6) 100%);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+            color: var(--blue-light);
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--blue-light);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+
+        /* ===== FAQ SECTION ===== */
+        .faq {
+            margin: 5rem 0;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+
+        .faq h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #0099ff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .faq-container {
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8) 0%, rgba(26, 31, 58, 0.5) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.8rem 2rem;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(0, 102, 255, 0.1);
+            color: var(--blue-light);
+            padding-left: 2.5rem;
+        }
+
+        .faq-toggle {
+            transition: transform 0.4s ease;
+            color: var(--blue-light);
+            font-size: 1.2rem;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            padding: 0 2rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 600px;
+            padding: 1.5rem 2rem;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(135deg, rgba(5, 8, 16, 0.9) 0%, rgba(10, 14, 39, 0.8) 100%);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+            animation: fadeInUp 0.8s ease-out 1s both;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #0099ff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: var(--blue-light);
+            transform: translateX(4px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.2) 0%, rgba(0, 168, 255, 0.1) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.3rem;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, #0066ff 0%, #00a8ff 100%);
+            border-color: var(--blue-light);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.3);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ===== ALERTS ===== */
+        .alert {
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            display: none;
+            animation: slideDown 0.4s ease;
+            border-left: 4px solid;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%);
+            color: #86efac;
+            border-left-color: #22c55e;
+        }
+
+        .alert-error {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.05) 100%);
+            color: #fca5a5;
+            border-left-color: #ef4444;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .features-grid,
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .upload-area {
+                padding: 1.5rem;
+            }
+
+            .dropzone {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .btn {
+                padding: 0.9rem 1.8rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        #fileInput {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/nexova-M8Q8mOkK57ikW9Rmb4Nwmw2gnjBO5o.png" alt="Nexova Logo" class="logo-img">
+                <div class="brand-info">
+                    <h1>NEXOVA ENHANCE</h1>
+                    <p class="tagline">Professional Photo Enhancement</p>
+                </div>
+            </div>
+            <a href="https://wa.me/233549551004" class="contact-btn" target="_blank">
+                <i class="fas fa-whatsapp"></i> Contact Us
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Transform Your Photos Instantly</h2>
+            <p>AI-powered enhancement with just one click</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Upload Area -->
+            <section class="upload-area">
+                <div class="dropzone" id="dropzone">
+                    <div class="dropzone-icon"><i class="fas fa-arrow-up-from-bracket"></i></div>
+                    <h3>Drag & Drop Your Image</h3>
+                    <p>or click to select a file from your device</p>
+                    <small>Supported: JPG, PNG, WebP (Max 50MB)</small>
+                </div>
+
+                <input type="file" id="fileInput" accept="image/*" />
+                <div class="alert alert-success" id="successAlert"></div>
+                <div class="alert alert-error" id="errorAlert"></div>
+            </section>
+
+            <!-- Image Slider Comparison -->
+            <section id="comparisonContainer">
+                <div class="slider-container">
+                    <div class="img-wrapper">
+                        <img id="beforeImage" alt="Original Image">
+                        <img id="afterImage" alt="Enhanced Image">
+                        <div id="loadingIndicator">
+                            <div class="spinner"></div>
+                            <p>Enhancing your image...</p>
+                        </div>
+                        <div class="slider-handle"></div>
+                        <div class="labels">
+                            <span class="label">Original</span>
+                            <span class="label">Enhanced</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-download" onclick="downloadImage()"><i class="fas fa-download"></i> Download</button>
+                    <button class="btn btn-reset" onclick="resetApp()"><i class="fas fa-redo"></i> Start Over</button>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features">
+                <h2>Why Choose Nexova?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                        <h3>Lightning Fast</h3>
+                        <p>Get enhanced photos in seconds with AI processing</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-crosshairs"></i></div>
+                        <h3>Precision Quality</h3>
+                        <p>Advanced algorithms preserve details while enhancing</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                        <h3>100% Private</h3>
+                        <p>Your images are secure and never stored</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-palette"></i></div>
+                        <h3>Professional Results</h3>
+                        <p>Studio-quality enhancements for everyone</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            How does Nexova Enhance work?
+                            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Nexova Enhance uses advanced AI algorithms to analyze and enhance your images. It improves clarity, contrast, colors, and overall quality automatically.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            What image formats are supported?
+                            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We support all common formats: JPG, PNG, WebP, and more. Maximum file size is 50MB for optimal performance.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Is my image data secure?
+                            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! Your privacy is paramount. Images are processed securely and deleted immediately after enhancement. We never store or share your data.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            How long does enhancement take?
+                            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Enhancement typically takes 2-5 seconds depending on image size. You'll see a progress indicator while processing.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Can I enhance multiple images?
+                            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! You can enhance as many images as you want. Simply upload the next image after downloading the enhanced version.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Is Nexova Enhance free?
+                            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Nexova Enhance is completely free with no registration required. No hidden fees, just professional enhancement.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Nexova</h3>
+                <p>Nexova Enhance is a powerful AI-driven photo enhancement tool designed to bring out the best in your images with professional-grade quality.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Support</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="https://wa.me/233549551004" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" target="_blank" title="Twitter"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Nexova Enhance | LostBoy Tech | WhatsApp: +233 549 551 004</p>
+        </div>
+    </footer>
+
+    <script>
+        const PRIMARY_API_URL = 'https://ab-enhancerv2.abrahamdw882.workers.dev/?url=';
+        const FALLBACK_API_URL = 'https://api.giftedtech.web.id/api/tools/remini?apikey=gifted&url=';
+        let currentImageUrl = null;
+        let sliderActive = false;
+        let enhancedImageBlob = null;
+        let originalImageBlob = null;
+
+        // Dropzone functionality
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('fileInput');
+
+        dropzone.addEventListener('click', () => fileInput.click());
+
+        dropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropzone.classList.add('drag-over');
+        });
+
+        dropzone.addEventListener('dragleave', () => {
+            dropzone.classList.remove('drag-over');
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('drag-over');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileSelect(files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileSelect(e.target.files[0]);
+            }
+        });
+
+        function handleFileSelect(file) {
+            if (!file.type.startsWith('image/')) {
+                showAlert('Please select a valid image file', 'error');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const imageData = e.target.result;
+                document.getElementById('beforeImage').src = imageData;
+                originalImageBlob = file;
+                showComparisonContainer();
+                setTimeout(() => {
+                    enhanceImage(imageData);
+                }, 500);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function enhanceImage(imageData) {
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const afterImage = document.getElementById('afterImage');
+
+            loadingIndicator.classList.add('active');
+            afterImage.style.display = 'block';
+            afterImage.style.clipPath = 'inset(0 50% 0 0)';
+
+            // First try the primary API
+            tryPrimaryAPI(imageData)
+                .then(result => {
+                    if (result.success) {
+                        enhancedImageBlob = result.blob;
+                        const objectURL = URL.createObjectURL(result.blob);
+                        afterImage.src = objectURL;
+                        currentImageUrl = objectURL;
+                        loadingIndicator.classList.remove('active');
+                        afterImage.style.display = 'block';
+                        showAlert('Image enhanced successfully!', 'success');
+                        initSlider();
+                    } else {
+                        // If primary API fails, try fallback API
+                        console.log('Primary API failed, trying fallback API...');
+                        return tryFallbackAPI(imageData);
+                    }
+                })
+                .then(fallbackResult => {
+                    if (fallbackResult && fallbackResult.success) {
+                        enhancedImageBlob = fallbackResult.blob;
+                        const objectURL = URL.createObjectURL(fallbackResult.blob);
+                        afterImage.src = objectURL;
+                        currentImageUrl = objectURL;
+                        loadingIndicator.classList.remove('active');
+                        afterImage.style.display = 'block';
+                        showAlert('Image enhanced successfully! (Fallback API)', 'success');
+                        initSlider();
+                    } else {
+                        // If both APIs fail, use client-side enhancement
+                        throw new Error('Both APIs failed');
+                    }
+                })
+                .catch(error => {
+                    console.error('All enhancement methods failed:', error);
+                    loadingIndicator.classList.remove('active');
+                    
+                    // Fallback to client-side enhancement
+                    showAlert('API enhancement failed. Using fallback enhancement.', 'error');
+                    setTimeout(() => {
+                        simulateEnhancement();
+                    }, 1000);
+                });
+        }
+
+        function tryPrimaryAPI(imageData) {
+            return new Promise((resolve) => {
+                const encodedImageData = encodeURIComponent(imageData);
+                const apiCall = `${PRIMARY_API_URL}${encodedImageData}`;
+                
+                fetch(apiCall, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Primary API error: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Primary API Response:', data);
+                    
+                    let enhancedImageUrl = null;
+                    
+                    // Extract enhanced image URL from response
+                    if (data.result) {
+                        enhancedImageUrl = data.result;
+                    } else if (data.enhanced) {
+                        enhancedImageUrl = data.enhanced;
+                    } else if (data.image) {
+                        enhancedImageUrl = data.image;
+                    } else if (data.url) {
+                        enhancedImageUrl = data.url;
+                    } else if (typeof data === 'string' && data.startsWith('http')) {
+                        enhancedImageUrl = data;
+                    } else if (data.data && data.data.url) {
+                        enhancedImageUrl = data.data.url;
+                    }
+                    
+                    if (enhancedImageUrl) {
+                        // Fetch the enhanced image
+                        return fetch(enhancedImageUrl);
+                    } else if (typeof data === 'string' && data.includes('base64')) {
+                        // Handle base64 response directly
+                        return Promise.resolve({
+                            blob: () => {
+                                const base64Data = data.replace(/^data:image\/\w+;base64,/, '');
+                                const binaryString = atob(base64Data);
+                                const bytes = new Uint8Array(binaryString.length);
+                                for (let i = 0; i < binaryString.length; i++) {
+                                    bytes[i] = binaryString.charCodeAt(i);
+                                }
+                                return new Blob([bytes], { type: 'image/jpeg' });
+                            }
+                        });
+                    } else {
+                        throw new Error('No enhanced image found in primary API response');
+                    }
+                })
+                .then(response => response.blob())
+                .then(blob => {
+                    resolve({ success: true, blob: blob });
+                })
+                .catch(error => {
+                    console.error('Primary API failed:', error);
+                    resolve({ success: false, error: error });
+                });
+            });
+        }
+
+        function tryFallbackAPI(imageData) {
+            return new Promise((resolve) => {
+                // For the fallback API, we need to upload the image first
+                // Since we can't upload directly, we'll use the base64 data
+                const encodedImageData = encodeURIComponent(imageData);
+                const apiCall = `${FALLBACK_API_URL}${encodedImageData}`;
+                
+                fetch(apiCall, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Fallback API error: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Fallback API Response:', data);
+                    
+                    let enhancedImageUrl = null;
+                    
+                    // Extract enhanced image URL from fallback API response
+                    if (data.result) {
+                        enhancedImageUrl = data.result;
+                    } else if (data.enhanced) {
+                        enhancedImageUrl = data.enhanced;
+                    } else if (data.image) {
+                        enhancedImageUrl = data.image;
+                    } else if (data.url) {
+                        enhancedImageUrl = data.url;
+                    } else if (typeof data === 'string' && data.startsWith('http')) {
+                        enhancedImageUrl = data;
+                    } else if (data.data && data.data.url) {
+                        enhancedImageUrl = data.data.url;
+                    }
+                    
+                    if (enhancedImageUrl) {
+                        // Fetch the enhanced image
+                        return fetch(enhancedImageUrl);
+                    } else if (typeof data === 'string' && data.includes('base64')) {
+                        // Handle base64 response directly
+                        return Promise.resolve({
+                            blob: () => {
+                                const base64Data = data.replace(/^data:image\/\w+;base64,/, '');
+                                const binaryString = atob(base64Data);
+                                const bytes = new Uint8Array(binaryString.length);
+                                for (let i = 0; i < binaryString.length; i++) {
+                                    bytes[i] = binaryString.charCodeAt(i);
+                                }
+                                return new Blob([bytes], { type: 'image/jpeg' });
+                            }
+                        });
+                    } else {
+                        throw new Error('No enhanced image found in fallback API response');
+                    }
+                })
+                .then(response => response.blob())
+                .then(blob => {
+                    resolve({ success: true, blob: blob });
+                })
+                .catch(error => {
+                    console.error('Fallback API failed:', error);
+                    resolve({ success: false, error: error });
+                });
+            });
+        }
+
+        function simulateEnhancement() {
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const afterImage = document.getElementById('afterImage');
+            const beforeImage = document.getElementById('beforeImage');
+
+            loadingIndicator.classList.add('active');
+
+            // Create a canvas to simulate enhancement
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                // Set canvas dimensions to match image
+                canvas.width = img.width;
+                canvas.height = img.height;
+                
+                // Draw original image
+                ctx.drawImage(img, 0, 0);
+                
+                // Apply some filters to simulate enhancement
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                
+                // Increase brightness and contrast
+                for (let i = 0; i < data.length; i += 4) {
+                    // Increase brightness
+                    data[i] = Math.min(255, data[i] * 1.1);     // Red
+                    data[i+1] = Math.min(255, data[i+1] * 1.1); // Green
+                    data[i+2] = Math.min(255, data[i+2] * 1.1); // Blue
+                    
+                    // Increase contrast
+                    const factor = 1.2;
+                    data[i] = factor * (data[i] - 128) + 128;
+                    data[i+1] = factor * (data[i+1] - 128) + 128;
+                    data[i+2] = factor * (data[i+2] - 128) + 128;
+                }
+                
+                ctx.putImageData(imageData, 0, 0);
+                
+                // Convert to blob for download
+                canvas.toBlob(blob => {
+                    enhancedImageBlob = blob;
+                    const objectURL = URL.createObjectURL(blob);
+                    afterImage.src = objectURL;
+                    currentImageUrl = objectURL;
+                    loadingIndicator.classList.remove('active');
+                    afterImage.style.display = 'block';
+                    showAlert('Image enhanced successfully! (Client-side Fallback)', 'success');
+                    initSlider();
+                }, 'image/jpeg', 0.9);
+            };
+            img.src = beforeImage.src;
+        }
+
+        function initSlider() {
+            const sliderHandle = document.querySelector('.slider-handle');
+            const imgWrapper = document.querySelector('.img-wrapper');
+            const afterImage = document.getElementById('afterImage');
+
+            // Reset slider position
+            sliderHandle.style.left = '50%';
+            afterImage.style.clipPath = 'inset(0 50% 0 0)';
+
+            const handleMouseDown = (e) => {
+                e.preventDefault();
+                sliderActive = true;
+                document.addEventListener('mousemove', handleMouseMove);
+                document.addEventListener('mouseup', handleMouseUp);
+            };
+
+            const handleMouseMove = (e) => {
+                if (!sliderActive) return;
+                updateSlider(e.clientX, imgWrapper, sliderHandle, afterImage);
+            };
+
+            const handleMouseUp = () => {
+                sliderActive = false;
+                document.removeEventListener('mousemove', handleMouseMove);
+                document.removeEventListener('mouseup', handleMouseUp);
+            };
+
+            // Touch events
+            const handleTouchStart = (e) => {
+                e.preventDefault();
+                sliderActive = true;
+                document.addEventListener('touchmove', handleTouchMove);
+                document.addEventListener('touchend', handleTouchEnd);
+            };
+
+            const handleTouchMove = (e) => {
+                if (!sliderActive) return;
+                updateSlider(e.touches[0].clientX, imgWrapper, sliderHandle, afterImage);
+            };
+
+            const handleTouchEnd = () => {
+                sliderActive = false;
+                document.removeEventListener('touchmove', handleTouchMove);
+                document.removeEventListener('touchend', handleTouchEnd);
+            };
+
+            // Add event listeners
+            sliderHandle.addEventListener('mousedown', handleMouseDown);
+            sliderHandle.addEventListener('touchstart', handleTouchStart, { passive: false });
+            
+            // Also allow clicking anywhere on the slider
+            imgWrapper.addEventListener('mousedown', (e) => {
+                if (e.target === imgWrapper || e.target === document.getElementById('beforeImage') || e.target === document.getElementById('afterImage')) {
+                    handleMouseDown(e);
+                    updateSlider(e.clientX, imgWrapper, sliderHandle, afterImage);
+                }
+            });
+            
+            imgWrapper.addEventListener('touchstart', (e) => {
+                if (e.target === imgWrapper || e.target === document.getElementById('beforeImage') || e.target === document.getElementById('afterImage')) {
+                    handleTouchStart(e);
+                    updateSlider(e.touches[0].clientX, imgWrapper, sliderHandle, afterImage);
+                }
+            }, { passive: false });
+        }
+
+        function updateSlider(clientX, imgWrapper, sliderHandle, afterImage) {
+            const rect = imgWrapper.getBoundingClientRect();
+            let x = clientX - rect.left;
+
+            if (x < 0) x = 0;
+            if (x > rect.width) x = rect.width;
+
+            const percentage = (x / rect.width) * 100;
+            sliderHandle.style.left = percentage + '%';
+            afterImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+        }
+
+        function showComparisonContainer() {
+            document.getElementById('comparisonContainer').classList.add('active');
+            setTimeout(() => {
+                document.getElementById('comparisonContainer').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        function downloadImage() {
+            if (!enhancedImageBlob) {
+                showAlert('No enhanced image to download', 'error');
+                return;
+            }
+
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(enhancedImageBlob);
+            link.download = `nexova-enhanced-${Date.now()}.jpg`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showAlert('Image downloaded successfully!', 'success');
+        }
+
+        function resetApp() {
+            document.getElementById('fileInput').value = '';
+            document.getElementById('beforeImage').src = '';
+            document.getElementById('afterImage').src = '';
+            document.getElementById('comparisonContainer').classList.remove('active');
+            document.getElementById('loadingIndicator').classList.remove('active');
+            currentImageUrl = null;
+            enhancedImageBlob = null;
+            originalImageBlob = null;
+            sliderActive = false;
+            clearAlerts();
+        }
+
+        function showAlert(message, type) {
+            const alertId = type === 'success' ? 'successAlert' : 'errorAlert';
+            const alert = document.getElementById(alertId);
+            alert.textContent = message;
+            alert.classList.add('show');
+            setTimeout(() => alert.classList.remove('show'), 4000);
+        }
+
+        function clearAlerts() {
+            document.getElementById('successAlert').classList.remove('show');
+            document.getElementById('errorAlert').classList.remove('show');
+        }
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
